@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import image from "../assets/66fd2233bd552b7eb1692084_image1.jpg";
+import image from "../assets/circle-image.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 function LandingPage() {

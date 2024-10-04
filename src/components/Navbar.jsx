@@ -45,7 +45,7 @@ export default function Navbar() {
         />
       </div>
       {/* Nav section */}
-      <div id="banner-section2-nav"  className="px-8 w-full top-0 bg-zinc-900 text-white border-b-2 border-cyan-400  z-10">
+      <div id="banner-section2-nav"  className="px-8 w-full top-0 bg-[#2E2A27] text-white border-b-2 border-cyan-400  z-10">
         <nav className=" w-full  font-medium text-base flex  justify-between py-7" >
 
         <div className="links flex gap-10">
