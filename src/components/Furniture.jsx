@@ -1,231 +1,148 @@
-
-
-
-// import React, { useRef, useLayoutEffect } from "react";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import image1 from "../assets/one.jpg";
-// import image2 from "../assets/two.webp";
-// import image3 from "../assets/three.webp";
-// import image4 from "../assets/four.webp";
-// import { useGSAP } from "@gsap/react";
-
-// // Register GSAP ScrollTrigger plugin
-// gsap.registerPlugin(ScrollTrigger);
-
-// function Furniture() {
-
-//   const sectionsRef = React.useRef([]);
-//   const titlesRef = React.useRef([]);
-
-//   const setupAnimations = () => {
-//     const sections = sectionsRef.current;
-//     const titles = titlesRef.current;
-
-//     gsap.set(titles, { opacity: 0 });
-
-//     sections.forEach((section, index) => {
-//       const targetTitle = titles[index];
-
-//       gsap.fromTo(
-//         targetTitle,
-//         { opacity: 0 },
-//         {
-//           opacity: 1,
-//           scrollTrigger: {
-//             trigger: section,
-//             start: "top center",
-//             end: "bottom 20%",
-//             scrub: true,
-//             markers: true,
-//             onEnter: () => {
-//               gsap.to(titles, { opacity: 0, duration: 0.5 });
-//               gsap.to(targetTitle, { opacity: 1, duration: 0.5 });
-//             },
-//             onLeave: () => {
-//               gsap.to(targetTitle, { opacity: 0, duration: 0.5 });
-//             },
-//             onEnterBack: () => {
-//               gsap.to(titles, { opacity: 0, duration: 0.5 });
-//               gsap.to(targetTitle, { opacity: 1, duration: 0.5 });
-//             },
-//             onLeaveBack: () => {
-//               gsap.to(targetTitle, { opacity: 0, duration: 0.5 });
-//             },
-//           },
-//         }
-//       );
-//     });
-//   };
-
-//   React.useEffect(() => {
-//     setupAnimations(); 
-
-//     return () => {
-//       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-//     };
-//   }, []);
-
-import React, { useRef, useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import image1 from "../assets/one.jpg";
-import image2 from "../assets/two.webp";
-import image3 from "../assets/three.webp";
-import image4 from "../assets/four.webp";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef, useState } from "react";
+import image1 from "../assets/images/oimage2.jpeg";
+import image2 from "../assets/images/oimage1.jpeg";
+import image3 from "../assets/images/oimage3.jpeg";
+import image4 from "../assets/images/oimage4.jpeg";
+import image5 from "../assets/images/oimage5.jpeg";
+import image6 from "../assets/images/oimage6.jpeg";
+import image7 from "../assets/images/oimage7.jpeg";
+import image8 from "../assets/images/oimage8.jpeg";
+import image9 from "../assets/images/oimage9.jpeg";
+import image10 from "../assets/images/oimage10.jpeg";
+import image11 from "../assets/images/oimage11.jpeg";
+import image12 from "../assets/images/oimage12.jpeg";
+import image13 from "../assets/images/oimage13.jpeg";
+import image14 from "../assets/images/oimage14.jpeg";
+import image15 from "../assets/images/oimage15.jpeg";
+import image16 from "../assets/images/oimage16.jpeg";
+import image17 from "../assets/images/oimage17.jpeg";
+import image18 from "../assets/images/oimage18.jpeg";
+import image19 from "../assets/images/oimage19.jpeg";
+import image20 from "../assets/images/oimage20.jpeg";
 
-// Register GSAP ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+export default function Furniture() {
+  const [activeTitle, setActiveTitle] = useState(0);
+  const imgSectionCardRef = useRef([]);
+  const imageCollections = [
+    [image1, image2, image3, image4],
+    [image5, image6, image7, image8, image9, image10],
+    [image11, image12, image13, image14],
+    [image15, image16, image17, image18, image19, image20],
+  ];
 
-function Furniture() {
-  const sectionsRef = useRef([]);
-  const titlesRef = useRef([]);
+  const titles = ["Furniture", "Chair", "Office", "Tech"];
 
-  const setupAnimations = () => {
-    const sections = sectionsRef.current;
-    const titles = titlesRef.current;
+  useGSAP(() => {
+    let ItemsTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#items-title-container",
+        scroller: "body",
+        //   markers: true,
+        start: "top 55%",
+        end: "bottom -30%",
+        scrub: true,
+      },
+    });
 
-    // Set initial opacity for titles
-    gsap.set(titles, { opacity: 0 });
+    ItemsTl.to("#items-title-container h1", {
+      position: "sticky",
+    });
 
-    sections.forEach((section, index) => {
-      const targetTitle = titles[index];
+    //managing image section =
+    imgSectionCardRef.current.forEach((div, idx) => {
+      const imgElements = div.querySelectorAll("img");
 
-      gsap.fromTo(
-        targetTitle,
-        { opacity: 0 },
+      let imgSectionTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: div,
+          scroller: "body",
+          start: `top ${idx === 0 ? "10%" : "80%"}`,
+          markers: true,
+          end: `bottom ${idx === 1 || idx === 3 ? "70%" : "top"}`,
+          scrub: 2,
+          onEnter: () => setActiveTitle(idx),
+          onEnterBack: () => setActiveTitle(idx),
+        },
+      });
+
+      imgSectionTl.fromTo(
+        ["#banner-section2-nav", "body"],
         {
-          opacity: 1,
-          scrollTrigger: {
-            trigger: section,
-            start: "top center",
-            end: "bottom center",  
-            scrub: true,
-            markers: true,
-            onEnter: () => {
-              gsap.to(titles, { opacity: 0, duration: 0.5 });
-              gsap.to(targetTitle, { opacity: 1, duration: 0.5 });
-            },
-            onLeave: () => {
-              gsap.to(targetTitle, { opacity: 0, duration: 0.5 });
-            },
-            onEnterBack: () => {
-              gsap.to(titles, { opacity: 0, duration: 0.5 });
-              gsap.to(targetTitle, { opacity: 1, duration: 0.5 });
-            },
-            onLeaveBack: () => {
-              gsap.to(targetTitle, { opacity: 0, duration: 0.5 });
-            },
-          },
+          backgroundColor: idx === 1 || idx === 3 ? "#2e2a27" : "#e8e2da",
+          color: idx === 1 || idx === 3 ? "#e8e2da" : "#2e2a27",
+        },
+        {
+          backgroundColor: idx === 1 || idx === 3 ? "#e8e2da" : "#2e2a27",
+          color: idx === 1 || idx === 3 ? "#2e2a27" : "#e8e2da",
         }
       );
+
+      imgElements.forEach((img, idx) => {
+        imgSectionTl.to(
+          img,
+          {
+            y: idx === 1 || idx === 2 || idx === 4 ? -100 : idx === 5 && -230,
+          },
+          0
+        );
+      });
     });
-  };
-
-  useLayoutEffect(() => {
-    setupAnimations();
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+  });
 
   return (
-    <section className="relative">
-      {/* Sticky text container */}
+    <>
+      <section id="items-title-container" className="px-7 ">
+        {/* items title - */}
 
-      <div className="sticky top-[-20rem] flex items-center justify-center z-0  h-screen ">
-        <h2
-          ref={(el) => (titlesRef.current[0] = el)}
-          className="text-[22vw] absolute bottom-0 text-black"
-        >
-          Furniture
-        </h2>
-        <h2
-          ref={(el) => (titlesRef.current[1] = el)}
-          className="text-[22vw] absolute bottom-0 opacity-0 text-black"
-        >
-          Chair
-        </h2>
-        <h2
-          ref={(el) => (titlesRef.current[2] = el)}
-          className="text-[22vw] absolute bottom-10 text-black"
-        >
-          Office
-        </h2>
-      </div>
-      
-      <div>
-        <div
-          ref={(el) => (sectionsRef.current[0] = el)}
-          className="relative h-screen flex items-center justify-center"
-        >
-          <div className="flex space-x-4">
-            <div className="flex flex-col">
-              <img src={image1} alt="Image 1" className="object-cover" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image2} alt="Image 2" className="object-cover translate-y-10" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image3} alt="Image 3" className="object-cover" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image4} alt="Image 4" className="object-cover translate-y-10" />
-            </div>
-          </div>
-        </div>
+        {titles.map((text, idx) => (
+          <h1
+            key={idx}
+            className={`text-[15vw] top-[50%]  font-bold ${
+              idx === activeTitle ? "block" : "hidden"
+            } `}
+          >
+            {text}
+          </h1>
+        ))}
 
-        {/* Second set of images */}
-        <div
-          ref={(el) => (sectionsRef.current[1] = el)}
-          className="relative h-screen p-4 flex items-center justify-center"
-        >
-          <div className="flex space-x-4">
-            <div className="flex flex-col">
-              <img src={image1} alt="Image 1" className="object-cover" />
+        {/* img section----- */}
+        <section className="space-y-52">
+          {imageCollections?.map((images, index) => (
+            <div
+              key={index}
+              ref={(el) => (imgSectionCardRef.current[index] = el)}
+              id="img-section"
+              className={`   ${
+                index === 1 || index === 3 ? "min-h-[150vh]" : "min-h-screen"
+              } relative`}
+            >
+              {images.map((image, idx) => (
+                <img
+                  key={idx}
+                  src={image}
+                  alt=""
+                  className={`absolute ${
+                    (idx === 0 && "max-h-80") ||
+                    (idx === 1 && "max-h-80 left-[60%] top-5") ||
+                    (index === 1 || index === 3
+                      ? idx === 2 && "max-h-72 top-[20%] left-[30%]"
+                      : idx === 2 && "max-h-[32rem] top-[30%] left-[30%]") ||
+                    (index === 1 || index === 3
+                      ? idx === 3 && "max-h-[60vh] top-[25%] right-0"
+                      : idx === 3 && "max-h-[60vh] bottom-0 right-0") ||
+                    (idx === 4 && "max-h-[60vh] bottom-0 left-0") ||
+                    (idx === 5 && "max-h-80 bottom-0 left-[30%]")
+                  }  `}
+                />
+              ))}
             </div>
-            <div className="flex flex-col">
-              <img src={image2} alt="Image 2" className="object-cover translate-y-10" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image3} alt="Image 3" className="object-cover" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image4} alt="Image 4" className="object-cover translate-y-10" />
-            </div>
-          </div>
-        </div>
+          ))}
+        </section>
 
-        {/* Third set of images */}
-        <div
-          ref={(el) => (sectionsRef.current[2] = el)}
-          className="relative h-screen px-4 py-32 flex items-center justify-center"
-        >
-          <div className="flex space-x-4">
-            <div className="flex flex-col">
-              <img src={image1} alt="Image 1" className="object-cover" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image2} alt="Image 2" className="object-cover translate-y-10" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image3} alt="Image 3" className="object-cover" />
-            </div>
-            <div className="flex flex-col">
-              <img src={image4} alt="Image 4" className="object-cover translate-y-10" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div className="min-h-[70vh]"></div>
+      </section>
+    </>
   );
 }
-
-export default Furniture;
-
-
-
-
-
