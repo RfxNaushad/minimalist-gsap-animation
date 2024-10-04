@@ -2,7 +2,7 @@ import React from "react";
 
 function Icon() {
   return (
-    <div className="flex flex-col gap-4 px-6 py-32 text-[3em]">
+    <div className="flex flex-col gap-4 px-6 pt-32 text-[3em]">
       <div className="flex gap-4  justify-center items-center">
         <span className="px-4 py-2  rounded-full border border-gray-500">
           Travel

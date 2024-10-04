@@ -6,6 +6,7 @@ import HeaderText from "./HeaderText";
 import LandingPage from "./LandingPage";
 import Icon from "./Icon";
 import Furniture from "./Furniture";
+// import OldFurnitureCode from "./OldFurnitureCode";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Navbar() {
@@ -74,6 +75,7 @@ export default function Navbar() {
       <HeaderText />
       <LandingPage />
       <Icon />
+      {/* <OldFurnitureCode/> */}
       <Furniture />
 
       <section className="min-h-screen"></section>
